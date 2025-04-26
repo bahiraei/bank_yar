@@ -35,13 +35,10 @@ jobs:
                -F caption="🎉 نسخه جدید اپ منتشر شد!" \
                https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument
                
-      - name: Create GitHub Release
-        uses: actions/upload-artifact@v3
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: "Release ${{ github.ref_name }}"
-          path: |
-            build/app/outputs/flutter-apk/app-release.apk
-
-      
+          files: build/app/outputs/flutter-apk/app-release.apk
       
       
