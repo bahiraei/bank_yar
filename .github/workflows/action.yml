@@ -36,7 +36,7 @@ jobs:
                https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument
                
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: actions/upload-artifact@v2
         with:
           tag_name: ${{ github.ref_name }}  # نام تگ (مثل v1.0.0)
           name: "Release ${{ github.ref_name }}"
