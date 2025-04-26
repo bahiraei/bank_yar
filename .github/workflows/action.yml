@@ -22,6 +22,15 @@ jobs:
         with:
           flutter-version: '3.29.3'
 
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}  # نام تگ (مثل v1.0.0)
+          name: "Release ${{ github.ref_name }}"
+          body: "🎉 نسخه جدید منتشر شد!"
+          files: |
+            build/app/outputs/flutter-apk/app-release.apk
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -34,3 +43,5 @@ jobs:
                -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
                -F caption="🎉 نسخه جدید اپ منتشر شد!" \
                https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument
+      
+      
